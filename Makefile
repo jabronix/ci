@@ -1,5 +1,5 @@
 version := cat semver.txt
-next_version := docker-context/scripts/semver.sh bump patch $version
+next_version := docker-context/scripts/semver.sh bump patch $(version)
 image_name := "jabronix/ci"
 
 # Runs the image in a container and drops you into the shell
