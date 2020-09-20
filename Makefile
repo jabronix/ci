@@ -37,12 +37,13 @@ build-cached:
 	docker build -t $(image_name) -f Dockerfile docker-context
 
 version-bump:
-	echo "${next_version}" > semver.txt
+	echo "bumping v$(version) to $(next_version)"
+	echo "$(next_version)" > semver.txt
 	git add .
-	git commit -m "chore/bump to version ${next_version}"
+	git commit -m "chore/bump to version $(next_version)"
 
 tag-commit:
-	git tag -a "v${next_version}" -m "v${next_version}"
+	git tag -a "v$(next_version)" -m "v$(next_version)"
 	git tag -a latest -m "latest"
 
 push-git:
