@@ -1,1 +1,1 @@
-docker-context/scripts/semver.sh bump patch cat semver.txt
+

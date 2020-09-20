@@ -1,0 +1,75 @@
+version: '3'
+
+# changes whether or not the command gets printed before running it
+silent: true
+
+vars:
+  VERSION: $(cat semver.txt)
+  NEXT_VERSION: $(docker-context/scripts/semver.sh bump patch {{.VERSION}})
+  IMAGE_NAME: "jabronix/ci"
+
+tasks:
+  default:
+    cmds:
+      - task: deploy
+
+  deploy:
+    desc: Performs all steps of the build and deploy.  Will skip steps that aren't needed.
+    deps: [git-push]
+
+  image-build:
+    desc: Builds docker image with cached layers.  Adding --no-cache to docker build produces slightly smaller builds
+    sources:
+      - docker-context/**
+      - Dockerfile
+    cmds:
+      - docker build -t {{.IMAGE_NAME}} -f Dockerfile docker-context
+
+  version-bump:
+    desc: Bump version and commit text file with new version number
+    cmds:
+      - echo "bumping v$(VERSION) to $(NEXT_VERSION)"
+      - echo "$(NEXT_VERSION)" > semver.txt
+      - git add .
+      - git commit -m "chore/bump to version $(NEXT_VERSION)"
+    deps: [image-build]
+
+  version-tag:
+    desc: Tag the git commit with the bumped version
+    cmds:
+      - git tag -a "v$(NEXT_VERSION)" -m "v$(NEXT_VERSION)"
+      - git tag -a latest -m "latest"
+    deps: [version-bump]
+
+  git-push:
+    desc: Pushes your current branch to git
+    cmds:
+      - git push -u origin HEAD --follow-tags
+    deps: [version-tag]
+
+  image-dive:
+    desc: CLI that gives you an interactive view of all of the layers
+    cmds:
+      - docker run --rm -it
+          -v /var/run/docker.sock:/var/run/docker.sock
+          wagoodman/dive:latest {{.IMAGE_NAME}}
+
+  atlantis-run:
+    desc: Runs the container like EKS or Fargate would (using the default entry point)
+    cmds:
+      - docker run -t {{.IMAGE_NAME}}
+
+  run:
+    desc: Runs the CI container as a development environment using zsh
+    cmds:
+      - echo {{.NEXT_VERSION}}
+      - docker run -it
+          --entrypoint /bin/zsh
+          --user dev
+          --mount type=bind,source="${HOME}",target=/localhost
+          --mount type=bind,source="${HOME}/.aws",target="/home/dev/.aws"
+          --mount type=bind,source="${HOME}/.ssh",target="/home/dev/.ssh"
+          --mount type=bind,source="${HOME}/.vimrc",target="/home/dev/.vimrc"
+          --mount type=bind,source="${HOME}/.vim",target="/home/dev/.vim"
+          --workdir /localhost
+          jabronix/ci:latest
