@@ -4,9 +4,11 @@ version: '3'
 silent: true
 
 vars:
-  VERSION: $(cat semver.txt)
-  NEXT_VERSION: $(docker-context/scripts/semver.sh bump patch {{.VERSION}})
-  IMAGE_NAME: "jabronix/ci"
+  VERSION:
+    sh: cat semver.txt
+  NEXT_VERSION:
+    sh: docker-context/scripts/semver.sh bump patch {{.VERSION}}
+  IMAGE_NAME: jabronix/ci
 
 tasks:
   default:
