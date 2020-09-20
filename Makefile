@@ -38,12 +38,12 @@ build-cached:
 
 version-bump:
 	echo "$next_version" > semver.txt
-	git add semver.txt
+	git add .
 	git commit -m "chore/bump to version ${next_version}"
 
 tag-commit:
-	git tag -a "v${next_version}" -m "Update to v${next_version}"
-	git tag -a latest
+	git tag -a "v${next_version}" -m "v${next_version}"
+	git tag -a latest -m "latest"
 
 push-git:
 	git push -u origin HEAD --follow-tags

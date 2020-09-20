@@ -6,7 +6,7 @@ LABEL authors="Jabronix"
 ENV ATLANTIS_DEFAULT_TF_VERSION="0.12.24"
 
 WORKDIR /home/temp
-
+RUN ls -la
 COPY scripts/packages.sh ./
 COPY scripts/cleanup.sh ./
 RUN chmod +x packages.sh && \
