@@ -37,7 +37,7 @@ build-cached:
 	docker build -t $(image_name) -f Dockerfile docker-context
 
 version-bump:
-	echo "$next_version" > semver.txt
+	echo "${next_version}" > semver.txt
 	git add .
 	git commit -m "chore/bump to version ${next_version}"
 
