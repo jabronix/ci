@@ -30,16 +30,16 @@ tasks:
   version-bump:
     desc: Bump version and commit text file with new version number
     cmds:
-      - echo "bumping v{{.VERSION}} to {{.NEXT_VERSION}}"
+      - echo "bumping v{{.VERSION}} to v{{.NEXT_VERSION}}"
       - echo "{{.NEXT_VERSION}}" > semver.txt
       - git add .
-      - git commit -m "chore/bump to version {{.NEXT_VERSION}}"
+      - git commit -m "chore/bump to version v{{.NEXT_VERSION}}"
     deps: [image-build]
 
   version-tag:
     desc: Tag the git commit with the bumped version
     cmds:
-      - git tag -a "v{{.NEXT_VERSION}}" -m "v{{.NEXT_VERSION}}"
+      - git tag -a "{{.NEXT_VERSION}}" -m "{{.NEXT_VERSION}}"
       - git tag -a -f latest -m "latest"
     deps: [version-bump]
 
