@@ -1,0 +1,13 @@
+**/.idea
+**/.task
+bin/**
+
+# Ignores files not required for the image
+
+**/Taskfile.yml
+**/semver.txt
+**/Makefile
+**/.git
+**/.task
+
+**/.gitignore

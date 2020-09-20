@@ -25,7 +25,7 @@ tasks:
       - docker-context/**
       - Dockerfile
     cmds:
-      - docker build -t {{.IMAGE_NAME}} -f Dockerfile docker-context
+      - docker build -t {{.IMAGE_NAME}} .
 
   version-bump:
     desc: Bump version and commit text file with new version number
@@ -33,7 +33,7 @@ tasks:
       - echo "bumping v{{.VERSION}} to v{{.NEXT_VERSION}}"
       - echo "{{.NEXT_VERSION}}" > semver.txt
       - git add .
-      - git commit -m "chore/bump to version v{{.NEXT_VERSION}}"
+      - git commit --amend --no-edit
     deps: [image-build]
 
   version-tag:
