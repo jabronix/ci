@@ -131,7 +131,7 @@ mv ./tfexport /usr/local/bin/tfexport
 ### END
 
 
-# Terraform version manager - tfenv (tfenv)
+# Terraform version manager - tfenv (tfenv) 
 # https://github.com/tfutils/tfenv
 # NOTE: We are using two different tools called tfenv, this one keeps the name tfenv
 git clone https://github.com/tfutils/tfenv.git tfenv
