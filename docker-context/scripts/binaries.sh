@@ -124,18 +124,18 @@ mv ./goofys /usr/local/bin/goofys
 
 # tfenv
 # https://github.com/cloudposse/tfenv
-# NOTE: We are using two different tools called tfenv, this one keeps the name tfenv
-curl -qfsSL https://github.com/cloudposse/tfenv/releases/download/0.4.0/tfenv_linux_amd64 -o tfenv
-chmod +x ./tfenv
-mv ./tfenv /usr/local/bin/tfenv
+# NOTE: We are using two different tools called tfenv, this one get renamed to tfexport
+curl -qfsSL https://github.com/cloudposse/tfenv/releases/download/0.4.0/tfenv_linux_amd64 -o tfexport
+chmod +x ./tfexport
+mv ./tfexport /usr/local/bin/tfexport
 ### END
 
 
-# Terraform version manager - tfenv (tfenvm)
+# Terraform version manager - tfenv (tfenv)
 # https://github.com/tfutils/tfenv
 # NOTE: We are using two different tools called tfenv, this one keeps the name tfenv
-git clone https://github.com/tfutils/tfenv.git tfenvm
-mv ./tfenvm/**/** /usr/local/bin/
+git clone https://github.com/tfutils/tfenv.git tfenv
+mv ./tfenv/**/** /usr/local/bin/
 ls -la /usr/local/bin
 which tfenv
 ### END
