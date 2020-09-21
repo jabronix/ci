@@ -32,8 +32,8 @@ tasks:
     cmds:
       - echo "bumping v{{.VERSION}} to v{{.NEXT_VERSION}}"
       - echo "{{.NEXT_VERSION}}" > semver.txt
-      - git add .
-      - git commit --amend --no-edit
+      - git add semver.txt
+      - git commit -m "v{{.NEXT_VERSION}}"
     deps: [image-build]
 
   version-tag:
