@@ -9,7 +9,9 @@ IFS=$'\n\t'
 
 # NEED THIS TO ADD AND VALIDATE REPOS
 apt-get update -y
-apt-get install --no-install-recommends gnupg2 software-properties-common -y
+apt-get install --no-install-recommends -y \
+gnupg2 \
+software-properties-common 
 ### END
 
 
@@ -36,6 +38,7 @@ apt-get install --no-install-recommends -y \
     ca-certificates \
     sudo \
     python3 \
+    python3-pip \
     git-lfs \
     openssl \
     nano \
@@ -43,8 +46,11 @@ apt-get install --no-install-recommends -y \
     iptables \
     jq \
     yq \
-    pass
+    pass \
+    gawk \
+    openssh-client
 ### END
+
 
 # CLEAN UP
 source ./cleanup.sh

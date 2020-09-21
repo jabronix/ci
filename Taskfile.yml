@@ -22,7 +22,7 @@ tasks:
   image-build:
     desc: Builds docker image with cached layers.  Adding --no-cache to docker build produces slightly smaller builds
     sources:
-      - docker-context/**
+      - docker-context/**/**
       - Dockerfile
     cmds:
       - docker build -t {{.IMAGE_NAME}} .

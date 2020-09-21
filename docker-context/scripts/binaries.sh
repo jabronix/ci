@@ -135,7 +135,7 @@ mv ./tfenv /usr/local/bin/tfenv
 # https://github.com/tfutils/tfenv
 # NOTE: We are using two different tools called tfenv, this one keeps the name tfenv
 git clone https://github.com/tfutils/tfenv.git tfenvm
-mv ./tfenv/**/** /usr/local/bin/
+mv ./tfenvm/**/** /usr/local/bin/
 ls -la /usr/local/bin
 which tfenv
 ### END
@@ -158,6 +158,11 @@ tar -C /usr/local -xzf go.tar.gz
 export PATH=$PATH:/usr/local/go/bin
 ### END
 
+# PRE-COMMIT - TF-DOCS - TFLINT - TFSEC
+pip3 install pre-commit
+curl -L "$(curl -s https://api.github.com/repos/terraform-docs/terraform-docs/releases/latest | grep -o -E "https://.+?-linux-amd64")" > terraform-docs && chmod +x terraform-docs && sudo mv terraform-docs /usr/bin/
+curl -L "$(curl -s https://api.github.com/repos/terraform-linters/tflint/releases/latest | grep -o -E "https://.+?_linux_amd64.zip")" > tflint.zip && unzip tflint.zip && rm tflint.zip && sudo mv tflint /usr/bin/
+env GO111MODULE=on go get -u github.com/liamg/tfsec/cmd/tfsec
 
 # CLEAN UP
 source ./cleanup.sh
