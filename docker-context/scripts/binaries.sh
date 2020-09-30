@@ -61,12 +61,12 @@ set -- gosu atlantis "$@"
 ### END
 
 
-# TERRRAGRUNT 
-# https://terragrunt.gruntwork.io/
-curl -qfsSL https://github.com/gruntwork-io/terragrunt/releases/download/v0.25.1/terragrunt_linux_amd64 -o terragrunt
-chmod +x terragrunt
-mv terragrunt /usr/local/bin
-### END
+# # TERRRAGRUNT 
+# # https://terragrunt.gruntwork.io/
+# curl -qfsSL https://github.com/gruntwork-io/terragrunt/releases/download/v0.25.1/terragrunt_linux_amd64 -o terragrunt
+# chmod +x terragrunt
+# mv terragrunt /usr/local/bin
+# ### END
 
 
 # DIRENV 
@@ -131,7 +131,7 @@ mv ./goofys /usr/local/bin/goofys
 ### END
 
 
-# tfenv
+# tfenv (tfexport)
 # https://github.com/cloudposse/tfenv
 # NOTE: We are using two different tools called tfenv, this one get renamed to tfexport
 curl -qfsSL https://github.com/cloudposse/tfenv/releases/download/0.4.0/tfenv_linux_amd64 -o tfexport
@@ -143,10 +143,17 @@ mv ./tfexport /usr/local/bin/tfexport
 # Terraform version manager - tfenv (tfenv) 
 # https://github.com/tfutils/tfenv
 # NOTE: We are using two different tools called tfenv, this one keeps the name tfenv
-git clone https://github.com/tfutils/tfenv.git tfenv
-mv ./tfenv/**/** /usr/local/bin/
-ls -la /usr/local/bin
-which tfenv
+mkdir /home/version-managers
+git clone https://github.com/tfutils/tfenv.git /home/version-managers/.tfenv
+ln -s /home/version-managers/.tfenv/bin/* /usr/local/bin
+### END
+
+
+# Terragrunt version manager - tgenv
+# https://github.com/cunymatthieu/tgenv
+# NOTE: We are using two different tools called tfenv, this one keeps the name tfenv
+git clone https://github.com/cunymatthieu/tgenv.git /home/version-managers/.tgenv
+ln -s /home/version-managers/.tgenv/bin/* /usr/local/bin
 ### END
 
 
@@ -172,6 +179,8 @@ pip3 install pre-commit
 curl -L "$(curl -s https://api.github.com/repos/terraform-docs/terraform-docs/releases/latest | grep -o -E "https://.+?-linux-amd64")" > terraform-docs && chmod +x terraform-docs && sudo mv terraform-docs /usr/bin/
 curl -L "$(curl -s https://api.github.com/repos/terraform-linters/tflint/releases/latest | grep -o -E "https://.+?_linux_amd64.zip")" > tflint.zip && unzip tflint.zip && rm tflint.zip && sudo mv tflint /usr/bin/
 env GO111MODULE=on go get -u github.com/liamg/tfsec/cmd/tfsec
+
+ls -la /usr/local/bin
 
 # CLEAN UP
 source ./cleanup.sh

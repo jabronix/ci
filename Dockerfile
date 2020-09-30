@@ -19,9 +19,9 @@ RUN chmod +x binaries.sh && \
     ./binaries.sh
 
 
-RUN wget https://releases.hashicorp.com/terraform/${ATLANTIS_DEFAULT_TF_VERSION}/terraform_${ATLANTIS_DEFAULT_TF_VERSION}_linux_amd64.zip && \
-    unzip terraform_${ATLANTIS_DEFAULT_TF_VERSION}_linux_amd64.zip && \
-    mv terraform /usr/local/bin/
+# RUN wget https://releases.hashicorp.com/terraform/${ATLANTIS_DEFAULT_TF_VERSION}/terraform_${ATLANTIS_DEFAULT_TF_VERSION}_linux_amd64.zip && \
+#     unzip terraform_${ATLANTIS_DEFAULT_TF_VERSION}_linux_amd64.zip && \
+#     mv terraform /usr/local/bin/
 
 ENV LANG C.UTF-8
 
@@ -42,7 +42,7 @@ USER atlantis
 
 ENV LANG C.UTF-8
 
-ENV PATH=/home/dev/bin:$PATH:/sbin:/usr/local/go/bin
+ENV PATH=/home/dev/bin:$HOME/.tfenv/bin:$HOME/.tgenv/bin:$PATH:/sbin:/usr/local/go/bin
 
 RUN go get -u github.com/liamg/tfsec/cmd/tfsec && \
     mkdir -p /home/atlantis/bin/
