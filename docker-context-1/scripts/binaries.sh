@@ -18,7 +18,6 @@ chmod 440 /etc/sudoers.d/root
 
 
 # LATEST VIM
-# https://github.com/vim/vim
 git clone https://github.com/vim/vim.git
 cd vim/src
 make
@@ -58,14 +57,6 @@ mv ./atlantis /usr/bin
 chown atlantis:root /usr/bin/atlantis
 setcap "cap_net_bind_service=+ep" /usr/bin/atlantis
 set -- gosu atlantis "$@"
-### END
-
-
-# TERRRAGRUNT 
-# https://terragrunt.gruntwork.io/
-curl -qfsSL https://github.com/gruntwork-io/terragrunt/releases/download/v0.25.1/terragrunt_linux_amd64 -o terragrunt
-chmod +x terragrunt
-mv terragrunt /usr/local/bin
 ### END
 
 
