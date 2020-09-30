@@ -145,6 +145,7 @@ mv ./tfexport /usr/local/bin/tfexport
 # NOTE: We are using two different tools called tfenv, this one keeps the name tfenv
 mkdir /home/version-managers
 git clone https://github.com/tfutils/tfenv.git /home/version-managers/.tfenv
+chmod 777 /home/version-managers
 ln -s /home/version-managers/.tfenv/bin/* /usr/local/bin
 ### END
 

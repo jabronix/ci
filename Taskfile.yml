@@ -71,7 +71,5 @@ tasks:
           --mount type=bind,source="${HOME}",target=/localhost
           --mount type=bind,source="${HOME}/.aws",target="/home/dev/.aws"
           --mount type=bind,source="${HOME}/.ssh",target="/home/dev/.ssh"
-          --mount type=bind,source="${HOME}/.vimrc",target="/home/dev/.vimrc"
-          --mount type=bind,source="${HOME}/.vim",target="/home/dev/.vim"
           --workdir /localhost
           jabronix/ci:latest
