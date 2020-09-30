@@ -165,7 +165,7 @@ curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bas
 
 
 # INITIALIZE PASS
-pass init dg_act_alteryx.com
+pass init default_pgp_key
 ### END
 
 
@@ -175,6 +175,13 @@ tar -C /usr/local -xzf go.tar.gz
 export PATH=$PATH:/usr/local/go/bin
 ### END
 
+
+# terragrunt-atlantis-config
+# https://github.com/transcend-io/terragrunt-atlantis-config
+cd && GO111MODULE=on go get github.com/transcend-io/terragrunt-atlantis-config@master && cd -
+### END
+
+
 # PRE-COMMIT - TF-DOCS - TFLINT - TFSEC
 pip3 install pre-commit
 curl -L "$(curl -s https://api.github.com/repos/terraform-docs/terraform-docs/releases/latest | grep -o -E "https://.+?-linux-amd64")" > terraform-docs && chmod +x terraform-docs && sudo mv terraform-docs /usr/bin/
@@ -182,6 +189,7 @@ curl -L "$(curl -s https://api.github.com/repos/terraform-linters/tflint/release
 env GO111MODULE=on go get -u github.com/liamg/tfsec/cmd/tfsec
 
 ls -la /usr/local/bin
+
 
 # CLEAN UP
 source ./cleanup.sh
