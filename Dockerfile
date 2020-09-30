@@ -28,7 +28,7 @@ ENV LANG C.UTF-8
 USER dev
 WORKDIR /home/dev
 
-ENV PATH=/home/dev/bin:$PATH:/sbin
+ENV PATH=/home/dev/bin:$PATH:/sbin:/usr/local/go/bin
 
 COPY docker-context/scripts/.zshrc ./home/dev
 COPY docker-context/scripts/user-helpers.sh ./
