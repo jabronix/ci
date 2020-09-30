@@ -1,7 +1,0 @@
-version: 3
-
-# The keys below match the command line parameters without the --
-
-checkout-strategy: merge
-automerge: true
-
